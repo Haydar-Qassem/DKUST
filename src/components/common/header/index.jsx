@@ -18,6 +18,9 @@ export default function Header() {
               <Link to="/portfolio">PORTFOLIO</Link>
             </li>
             <li>
+              <Link to="/products">PRODUCTS</Link>
+            </li>
+            <li>
               <Link to="/services">SERVICES</Link>
             </li>
             <li>

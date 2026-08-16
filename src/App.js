@@ -5,6 +5,7 @@ import Header from "./components/common/header";
 import Footer from "./components/common/footer";
 import Login from "./pages/login-page";
 import Register from "./pages/register-page";
+import Products from "./pages/products-page";
 
 export default function App() {
   return (
@@ -36,6 +37,10 @@ export default function App() {
                   <h2>Portfolio</h2>
                 </div>
               }
+            />
+            <Route path="/products" element={
+              <Products />
+            }
             />
             <Route
               path="/services"

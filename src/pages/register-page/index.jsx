@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import InputComponent from "D:/FrontEnd Course/my-first-app/src/components/common/InputComponent/index.jsx";
-import CustomButton from "D:/FrontEnd Course/my-first-app/src/components/common/CustomButton/index.jsx";
-import SocialButton from "D:/FrontEnd Course/my-first-app/src/components/common/SocialButton/index.jsx";
-import AuthCard from "D:/FrontEnd Course/my-first-app/src/components/common/AuthCard/index.jsx";
+import InputComponent from "../../../src/components/common/InputComponent/index.jsx";
+import CustomButton from "../../../src/components/common/CustomButton/index.jsx";
+import SocialButton from "../../../src/components/common/SocialButton/index.jsx";
+import AuthCard from "../../../src/components/common/AuthCard/index.jsx";
 import { RegisterStyles } from "./styles";
 
 function Register() {
