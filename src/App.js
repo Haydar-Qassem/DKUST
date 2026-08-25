@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./styles.css";
 import Header from "./components/common/header";
 import Footer from "./components/common/footer";
 import Login from "./pages/login-page";
 import Register from "./pages/register-page";
 import Products from "./pages/products-page";
+import { ProductDetailsPage } from "./pages/ProductDetails-page";
 
 export default function App() {
   return (
@@ -84,6 +84,7 @@ export default function App() {
             />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/products/:id" element={<ProductDetailsPage />} />
             <Route
               path="*"
               element={

@@ -13,8 +13,11 @@ import {
   ActionRow,
   ActionButton,
 } from "./styles";
+import { useNavigate } from "react-router-dom";
 
 const ProductCardList = ({ product, onAddToCart }) => {
+  const navigate = useNavigate();
+
   return (
     <CardContainer layout="list">
       {product.badge && <BadgeItem>{product.badge}</BadgeItem>}
@@ -67,7 +70,12 @@ const ProductCardList = ({ product, onAddToCart }) => {
         </div>
 
         <ActionRow layout="list">
-          <ActionButton variant="outline">Details</ActionButton>
+          <ActionButton
+            variant="outline"
+            onClick={() => navigate(`/products/${product.id}`)}
+          >
+            Details
+          </ActionButton>
           <ActionButton variant="solid" onClick={() => onAddToCart(product)}>
             <svg
               width="16"

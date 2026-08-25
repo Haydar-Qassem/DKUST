@@ -13,8 +13,10 @@ import {
   ActionRow,
   ActionButton,
 } from "./styles";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const ProductCardGrid = ({ product, onAddToCart }) => {
+  const navigate = useNavigate();
   return (
     <CardContainer layout="grid">
       {product.badge && <BadgeItem>{product.badge}</BadgeItem>}
@@ -67,7 +69,12 @@ const ProductCardGrid = ({ product, onAddToCart }) => {
             <PriceMonth>/mo</PriceMonth>
           </PriceBlock>
           <div style={{ display: "flex", gap: "0.5rem" }}>
-            <ActionButton variant="outline">Details</ActionButton>
+            <ActionButton
+              variant="outline"
+              onClick={() => navigate(`/products/${product.id}`)}
+            >
+              Details
+            </ActionButton>
             <ActionButton variant="solid" onClick={() => onAddToCart(product)}>
               <svg
                 width="16"

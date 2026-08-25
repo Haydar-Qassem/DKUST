@@ -66,7 +66,6 @@ import {
   Banner,
   CategoryButton,
   CategoryList,
-  FilterBar,
   GridWrapper,
   IconButton,
   ListWrapper,
@@ -84,6 +83,7 @@ import {
 } from "./styles";
 import ProductCardGrid from "./ProductCardGrid";
 import ProductCardList from "./ProductCardList";
+import { FilterBar } from "../../components/common/FilterBar";
 
 const productsArray = [
   {
