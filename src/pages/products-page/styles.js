@@ -7,13 +7,6 @@ export const PageWrapper = styled.div`
   background-color: #f7f8fc;
 `;
 
-export const Banner = styled.div`
-  background-color: #121026;
-  color: #ffffff;
-  text-align: center;
-  padding: 4rem 2rem;
-`;
-
 export const CategoryList = styled.div`
   display: flex;
   gap: 1rem;

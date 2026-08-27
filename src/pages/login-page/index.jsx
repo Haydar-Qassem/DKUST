@@ -30,61 +30,72 @@ function Login() {
   return (
     <main className="login-wrapper d-flex flex-column align-items-center justify-content-center py-5">
       <AuthCard
-      title="Welcome Back"
-      subtitle="Sign in to your DKUST account"
-      onSubmit={handleLogin}
-    >
-      {/* Email */}
-      <InputComponent
-        type="email"
-        label="Email-Address"
-        placeholder="you@example.com"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        icon="fa-regular fa-envelope"
-      />
-
-      {/* Password */}
-      <InputComponent
-        type="password"
-        label="Password"
-        placeholder="Min. 6 characters"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        icon="fa-solid fa-lock"
-        icon2="fa-regular fa-eye"
-      />
-
-      {/* Submit */}
-      <CustomButton text="SIGN IN" id="signInBtn" classN="form-submit-btn" />
-
-      <div className="center-in-login-card">
-        <div className="or-continue-with">or continue with</div>
-      </div>
-
-      <div className="login-social-group">
-        <SocialButton
-          text="Google"
-          id="googleBtn"
-          onClick={signInWithGoogle}
-          img="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
+        title="Welcome Back"
+        subtitle="Sign in to your DKUST account"
+        onSubmit={handleLogin}
+      >
+        {/* Email */}
+        <InputComponent
+          type="email"
+          label="Email-Address"
+          placeholder="you@example.com"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          icon="fa-regular fa-envelope"
         />
-        <SocialButton
-          text="Facebook"
-          id="facebookBtn"
-          onClick={signInWithFB}
-          img="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
-        />
-      </div>
 
-      {/* Sign Up Link */}
-      <div className="login-signup-text">
-        Don't have an account?{" "}
-        <a href="/signup" className="login-signup-link">
-          Sign up
-        </a>
-      </div>
-    </AuthCard>
+        {/* Password */}
+        <InputComponent
+          type="password"
+          label="Password"
+          placeholder="Min. 6 characters"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          icon="fa-solid fa-lock"
+          icon2="fa-regular fa-eye"
+        />
+
+        {/* Submit */}
+        <CustomButton
+          content="SIGN IN"
+          id="signInBtn"
+          classN="form-submit-btn"
+          width="100%"
+          bgColor="var(--color-green)"
+          color="var(--color-white)"
+          bgColorHover="var(--color-green-hover)"
+          borderRadius= "0.325rem"
+          border= "none"
+          py="12px"
+        />
+
+        <div className="center-in-login-card">
+          <div className="or-continue-with">or continue with</div>
+        </div>
+
+        <div className="login-social-group">
+          <SocialButton
+            text="Google"
+            id="googleBtn"
+            onClick={signInWithGoogle}
+            img="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
+          />
+          <SocialButton
+            text="Facebook"
+            id="facebookBtn"
+            onClick={signInWithFB}
+            img="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg"
+          />
+        </div>
+
+        {/* Sign Up Link */}
+        <div className="login-signup-text">
+          Don't have an account?{" "}
+          <a href="/signup" className="login-signup-link">
+            Sign up
+          </a>
+        </div>
+      </AuthCard>
 
       {/* Back to Home */}
       <a

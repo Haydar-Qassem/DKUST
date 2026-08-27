@@ -84,6 +84,7 @@ import {
 import ProductCardGrid from "./ProductCardGrid";
 import ProductCardList from "./ProductCardList";
 import { FilterBar } from "../../components/common/FilterBar";
+import HeroSection from "../../components/common/HeroSection";
 
 const productsArray = [
   {
@@ -202,15 +203,10 @@ const ProductsPage = () => {
 
   return (
     <PageWrapper>
-      <Banner>
-        <h1 style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>
-          Our Products
-        </h1>
-        <p style={{ color: "#aaa", maxWidth: "600px", margin: "0 auto" }}>
-          Explore our range of software, AI tools, hardware kits, and robotics
-          solutions built for modern teams.
-        </p>
-      </Banner>
+      <HeroSection
+        title="Our Products"
+        subtitle="Explore our range of software, AI tools, hardware kits, and robotics solutions built for modern teams."
+      />
 
       <FilterBar>
         <CategoryList>

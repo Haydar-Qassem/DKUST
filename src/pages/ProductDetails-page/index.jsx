@@ -1,8 +1,8 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { FilterBar } from "../../components/common/FilterBar";
-import { DetailedProductCard } from "../../components/common/DetailedProductCard";
+import { DetailedProductCard } from "../../components/common/ProductsCards/DetailedProductCard";
 import { useState } from "react";
-import { MinimalCard } from "../../components/common/MinimalCard";
+import { MinimalCard } from "../../components/common/ProductsCards/MinimalCard";
 import { RelatedProductsSection } from "./styles";
 import { FiArrowLeft } from "react-icons/fi";
 
@@ -153,7 +153,7 @@ export const ProductDetailsPage = () => {
       <FilterBar>
         <div>
           <span style={{ color: `var(--color-text-gray)` }}>
-            Home / Poducts /{" "}
+            Home / Products /{" "}
           </span>
           {product.name}
         </div>

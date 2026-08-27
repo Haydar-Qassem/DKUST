@@ -6,8 +6,9 @@ export const CounterWrapper = styled.div`
 
 export const PlusWrapper = styled.button`
   border: 1px solid var(--border);
-  border-top-left-radius: var(--radius);
-  border-bottom-left-radius: var(--radius);
+  border-left: none;
+  border-top-right-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
   padding: 5px 12px;
   background-color: transparent;
   color: var(--color-text-gray);
@@ -18,9 +19,8 @@ export const PlusWrapper = styled.button`
 
 export const MinusWrapper = styled.button`
   border: 1px solid var(--border);
-  border-left: none;
-  border-top-right-radius: var(--radius);
-  border-bottom-right-radius: var(--radius);
+  border-top-left-radius: var(--radius);
+  border-bottom-left-radius: var(--radius);
   padding: 5px 12px;
   background-color: transparent;
   color: var(--color-text-gray);

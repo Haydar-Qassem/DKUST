@@ -38,23 +38,23 @@ function Register() {
       <RegisterStyles>
         <AuthCard title="Create Account" subtitle="" onSubmit={handleRegister}>
           <div className="d-flex flex-row gap-3">
-          {/*First name*/}
-          <InputComponent
-            type="text"
-            label="First Name"
-            placeholder="John"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-          />
+            {/*First name*/}
+            <InputComponent
+              type="text"
+              label="First Name"
+              placeholder="John"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
 
-          {/* Last Name */}
-          <InputComponent
-            type="text"
-            label="Last Name"
-            placeholder="Doe"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-          />
+            {/* Last Name */}
+            <InputComponent
+              type="text"
+              label="Last Name"
+              placeholder="Doe"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+            />
           </div>
 
           {/* Email */}
@@ -110,9 +110,16 @@ function Register() {
 
           {/* Submit */}
           <CustomButton
-            text="CREATE ACCOUNT"
+            content="CREATE ACCOUNT"
             id="registerBtn"
             classN="form-submit-btn"
+            width="100%"
+            bgColor="var(--color-green)"
+            color="var(--color-white)"
+            bgColorHover="var(--color-green-hover)"
+            borderRadius= "0.375rem"
+            border="none"
+            py="12px"
           />
 
           <div className="center-in-login-card">

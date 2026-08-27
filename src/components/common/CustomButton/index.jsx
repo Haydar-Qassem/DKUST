@@ -1,16 +1,45 @@
 import { CustomButtonStyles } from "./styles";
 
-function CustomButton(props) {
-    const text = props.text;
-    const id = props.id;
-    const classN = props.classN;
+function CustomButton({
+  content,
+  id,
+  classN,
+  border,
+  borderRadius,
+  bgColor,
+  color,
+  borderColor,
+  borderWidth,
+  bgColorHover,
+  colorHover,
+  borderColorHover,
+  borderWidthHover,
+  py,
+  px,
+  width,
+  onClick,
+}) {
   return (
-    <CustomButtonStyles>
-      <div className="center-in-login-card">
-        <button type="submit" id={id} className={classN}>
-          {text}
-        </button>
-      </div>
+    <CustomButtonStyles
+      type="submit"
+      id={id}
+      className={classN}
+      onClick={onClick}
+      $border={border}
+      $borderRadius={borderRadius}
+      $bgColor={bgColor}
+      $color={color}
+      $borderColor={borderColor}
+      $borderWidth={borderWidth}
+      $bgColorHover={bgColorHover}
+      $colorHover={colorHover}
+      $borderColorHover={borderColorHover}
+      $borderWidthHover={borderWidthHover}
+      $py={py}
+      $px={px}
+      $width={width}
+    >
+      {content}
     </CustomButtonStyles>
   );
 }

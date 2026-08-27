@@ -23,13 +23,13 @@ export const Counter = ({ minimum, maximum }) => {
       <div className="d-flex gap-2 align-items-center">
         <span style={{ fontSize: "0.9rem" }}>Qty:</span>
         <CounterWrapper>
-          <PlusWrapper onClick={handleIncrease} style={{ cursor: "pointer" }}>
-            +
-          </PlusWrapper>
-          <CountWrapper>{count}</CountWrapper>
           <MinusWrapper onClick={handleDecrease} style={{ cursor: "pointer" }}>
             -
           </MinusWrapper>
+          <CountWrapper>{count}</CountWrapper>
+          <PlusWrapper onClick={handleIncrease} style={{ cursor: "pointer" }}>
+            +
+          </PlusWrapper>
         </CounterWrapper>
       </div>
     </>

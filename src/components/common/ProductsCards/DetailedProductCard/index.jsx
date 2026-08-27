@@ -1,5 +1,5 @@
-import { Counter } from "../Counter";
-import Tag from "../Tag";
+import { Counter } from "../../Counter";
+import Tag from "../../Tag";
 import {
   ActionButton,
   ActionRow,
