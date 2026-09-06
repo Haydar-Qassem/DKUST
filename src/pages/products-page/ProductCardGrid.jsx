@@ -29,8 +29,9 @@ const ProductCardGrid = ({ product, onAddToCart }) => {
             display: "flex",
             alignItems: "center",
             gap: "0.4rem",
-            color: "#888",
-            fontSize: "0.85rem",
+            color: "var(--color-gray-400)",
+            fontSize: "var(--text-xs)",
+            marginBottom: "4px",
           }}
         >
           <svg
@@ -47,18 +48,43 @@ const ProductCardGrid = ({ product, onAddToCart }) => {
         </div>
 
         <CardHeader>
-          <h3 style={{ margin: "0.5rem 0", color: "#1a1a1a" }}>
+          <h3
+            style={{
+              marginBottom: "8px",
+              color: "var(--color-gray-900)",
+              fontSize: "var(--text-sm)",
+            }}
+          >
             {product.name}
           </h3>
         </CardHeader>
 
         <DescriptionText>{product.description}</DescriptionText>
 
-        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-          <span style={{ color: "#ffc107", fontSize: "1.2rem" }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "0.5rem",
+            marginTop: "12px",
+          }}
+        >
+          <span
+            style={{
+              color: "#ffc107",
+              fontSize: "1rem",
+              lineHeight: "16px",
+            }}
+          >
             {"★".repeat(Math.round(product.rating))}
           </span>
-          <span style={{ color: "#888", fontSize: "0.85rem" }}>
+          <span
+            style={{
+              color: "var(--color-gray-400)",
+              fontSize: "var(--text-xs)",
+              lineHeight: "16px",
+            }}
+          >
             ({product.reviewsCount})
           </span>
         </div>
@@ -75,7 +101,7 @@ const ProductCardGrid = ({ product, onAddToCart }) => {
             >
               Details
             </ActionButton>
-            <ActionButton variant="solid" onClick={() => onAddToCart(product)}>
+            <ActionButton variant="green" onClick={() => onAddToCart(product)}>
               <svg
                 width="16"
                 height="16"

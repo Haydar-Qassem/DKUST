@@ -8,16 +8,20 @@ export const Banner = styled.div`
   background-color: #121026;
   color: #ffffff;
   text-align: center;
-  padding: 4rem 2rem;
+  padding: 56px 24px;
 `;
 
 export const HeroTitle = styled.h1`
-  font-size: "2.5rem";
-  margin-bottom: "1rem";
+  margin-bottom: 16px;
+  font-size: var(--text-4xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--text-4xl--line-height);
 `;
 
 export const HeroSubtitle = styled.p`
-  color: "#aaa";
-  max-width: "600px";
-  margin: "0 auto";
+  color: var(--color-gray-300);
+  max-width: var(--container-lg);
+  margin-bottom: 24px;
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
 `;

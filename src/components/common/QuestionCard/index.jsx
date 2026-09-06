@@ -1,44 +1,31 @@
 import { OptionItem, QuestionCardContainer, QuestionStatement } from "./styles";
 
-const QuestionCard = ({ questionData, registerFn, submittedAnswer }) => {
-  const isSubmitted = submittedAnswer !== undefined;
+const QuestionCard = ({ questionData, selectedOption, setSelectedOption }) => {
   return (
     <QuestionCardContainer>
       <QuestionStatement>{questionData.question}</QuestionStatement>
       <ul>
         {questionData.options.map((option, index) => {
-          const isCorrectOption = option === questionData.correctAnswer;
-          const isUserSelectedOption = option === submittedAnswer;
+          const isUserSelectedOption = option === selectedOption;
 
-          let feedbackLabel = "";
-          if (isSubmitted) {
-            if (isCorrectOption) {
-              feedbackLabel = "Correct";
-            }
-          }
           return (
             <OptionItem
               key={index}
-              $isSubmitted={isSubmitted}
-              $isCorrectOption={isCorrectOption}
               $isUserSelectedOption={isUserSelectedOption}
             >
-              <label>
+              <label style={{ width: "100%", cursor: "pointer" }}>
                 <div
                   style={{ display: "flex", alignItems: "center", gap: "10px" }}
                 >
                   <input
                     type="radio"
-                    name={questionData.id}
+                    name={`question-${questionData.id}`}
                     value={option}
-                    disabled={isSubmitted}
-                    {...registerFn(questionData.id, {
-                      required: "Please select an answer",
-                    })}
+                    checked={isUserSelectedOption}
+                    onChange={(e) => setSelectedOption(e.target.value)}
                   />
                   {option}
                 </div>
-                <span style={{ fontSize: "0.750rem" }}>{feedbackLabel}</span>
               </label>
             </OptionItem>
           );

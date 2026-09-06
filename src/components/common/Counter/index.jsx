@@ -20,8 +20,18 @@ export const Counter = ({ minimum, maximum }) => {
   };
   return (
     <>
-      <div className="d-flex gap-2 align-items-center">
-        <span style={{ fontSize: "0.9rem" }}>Qty:</span>
+      <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
+        <span
+          style={{
+            fontSize: "0.9rem",
+            fontSize: "var(--text-sm)",
+            lineHeight: "var(--text-sm--line-height)",
+            color: "var(--color-gray-600)",
+            fontWeight: "var(--font-weight-medium)",
+          }}
+        >
+          Qty:
+        </span>
         <CounterWrapper>
           <MinusWrapper onClick={handleDecrease} style={{ cursor: "pointer" }}>
             -

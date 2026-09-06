@@ -1,51 +1,57 @@
-import { Link } from "react-router-dom";
-import { HeaderStyles } from "./styles";
+import { Link, NavLink } from "react-router-dom";
+import { HeaderButton, HeaderStyles, Logo } from "./styles";
 
 export default function Header() {
   return (
     <HeaderStyles>
-      <div className="container header-inner d-flex align-items-center justify-content-between">
-        <div className="logo d-inline-block fw-bold fs-4">DKUST</div>
+      <div
+        className="container"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          height: "calc(var(--spacing) * 16)",
+          paddingInline: "24px",
+        }}
+      >
+        <Logo>DKUST</Logo>
         <nav className="main-nav">
-          <ul className="d-flex align-items-center justify-content-between gap-4 mb-0">
+          <ul>
             <li>
-              <Link to="/">HOME</Link>
+              <NavLink to="/">HOME</NavLink>
             </li>
             <li>
-              <Link to="/about">ABOUT</Link>
+              <NavLink to="/about">ABOUT</NavLink>
             </li>
             <li>
-              <Link to="/portfolio">PORTFOLIO</Link>
+              <NavLink to="/portfolio">PORTFOLIO</NavLink>
             </li>
             <li>
-              <Link to="/products">PRODUCTS</Link>
+              <NavLink to="/products">PRODUCTS</NavLink>
             </li>
             <li>
-              <Link to="/services">SERVICES</Link>
+              <NavLink to="/services">SERVICES</NavLink>
             </li>
             <li>
-              <Link to="/blog">BLOG</Link>
+              <NavLink to="/blog">BLOG</NavLink>
             </li>
             <li>
-              <Link to="/resources">RESOURCES</Link>
+              <NavLink to="/resources">RESOURCES</NavLink>
             </li>
             <li>
-              <Link to="/quiz">QUIZ</Link>
+              <NavLink to="/quiz">QUIZ</NavLink>
             </li>
             <li>
-              <Link to="/contact">CONTACT</Link>
+              <NavLink to="/contact">CONTACT</NavLink>
             </li>
             <li>
-              <Link to="/login" className="btn btn-outline-success btn-login">
-                LOGIN
+              <Link to="/login" className="header-btn">
+                <HeaderButton>LOGIN</HeaderButton>
               </Link>
             </li>
             <li>
-              <Link
-                to="/register"
-                className="btn btn-outline-success btn-login"
-              >
-                REGISTER
+              <Link to="/register" className="header-btn">
+                <HeaderButton>REGISTER</HeaderButton>
               </Link>
             </li>
           </ul>

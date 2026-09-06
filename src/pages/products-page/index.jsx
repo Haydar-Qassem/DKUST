@@ -206,110 +206,128 @@ const ProductsPage = () => {
       <HeroSection
         title="Our Products"
         subtitle="Explore our range of software, AI tools, hardware kits, and robotics solutions built for modern teams."
+        height="204px"
+        background="linear-gradient(135deg, rgb(13, 27, 62) 0%, rgb(26, 58, 110) 50%, rgb(13, 27, 62) 100%)"
       />
 
       <FilterBar>
-        <CategoryList>
-          {categories.map((category) => (
-            <CategoryButton
-              key={category}
-              active={selectedCategory === category}
-              onClick={() => setSelectedCategory(category)}
-            >
-              {category}
-            </CategoryButton>
-          ))}
-        </CategoryList>
+        <div className="container">
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              flexWrap: "wrap",
+              rowGap: "12px",
+            }}
+          >
+            <CategoryList>
+              {categories.map((category) => (
+                <CategoryButton
+                  key={category}
+                  active={selectedCategory === category}
+                  onClick={() => setSelectedCategory(category)}
+                >
+                  {category}
+                </CategoryButton>
+              ))}
+            </CategoryList>
 
-        <ViewControls>
-          <SortContainer onMouseLeave={() => setIsSortOpen(false)}>
-            <SortButton
-              isOpen={isSortOpen}
-              onClick={() => setIsSortOpen(!isSortOpen)}
-            >
-              {currentSortLabel}
-              <svg
-                width="16"
-                height="16"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                style={{
-                  transform: isSortOpen ? "rotate(180deg)" : "rotate(0deg)",
-                  transition: "transform 0.2s",
-                }}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M19 9l-7 7-7-7"
-                />
-              </svg>
-            </SortButton>
-
-            {isSortOpen && (
-              <DropdownMenu>
-                {sortOptions.map((option) => (
-                  <DropdownItem
-                    key={option.value}
-                    active={sortBy === option.value}
-                    onClick={() => {
-                      setSortBy(option.value);
-                      setIsSortOpen(false);
+            <ViewControls>
+              <SortContainer onMouseLeave={() => setIsSortOpen(false)}>
+                <SortButton
+                  isOpen={isSortOpen}
+                  onClick={() => setIsSortOpen(!isSortOpen)}
+                >
+                  {currentSortLabel}
+                  <svg
+                    width="16"
+                    height="16"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    viewBox="0 0 24 24"
+                    style={{
+                      transform: isSortOpen ? "rotate(180deg)" : "rotate(0deg)",
+                      transition: "transform 0.2s",
                     }}
                   >
-                    {option.label}
-                  </DropdownItem>
-                ))}
-              </DropdownMenu>
-            )}
-          </SortContainer>
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </SortButton>
 
-          <ToggleContainer>
-            <ToggleBtn
-              active={viewMode === "grid"}
-              onClick={() => setViewMode("grid")}
-            >
-              grid
-            </ToggleBtn>
-            <ToggleBtn
-              active={viewMode === "list"}
-              onClick={() => setViewMode("list")}
-            >
-              list
-            </ToggleBtn>
-          </ToggleContainer>
-        </ViewControls>
+                {isSortOpen && (
+                  <DropdownMenu>
+                    {sortOptions.map((option) => (
+                      <DropdownItem
+                        key={option.value}
+                        active={sortBy === option.value}
+                        onClick={() => {
+                          setSortBy(option.value);
+                          setIsSortOpen(false);
+                        }}
+                      >
+                        {option.label}
+                      </DropdownItem>
+                    ))}
+                  </DropdownMenu>
+                )}
+              </SortContainer>
+
+              <ToggleContainer>
+                <ToggleBtn
+                  active={viewMode === "grid"}
+                  onClick={() => setViewMode("grid")}
+                >
+                  grid
+                </ToggleBtn>
+                <ToggleBtn
+                  active={viewMode === "list"}
+                  onClick={() => setViewMode("list")}
+                >
+                  list
+                </ToggleBtn>
+              </ToggleContainer>
+            </ViewControls>
+          </div>
+        </div>
       </FilterBar>
 
-      <ResultsText>
-        {processedProducts.length === 0
-          ? "No products found."
-          : `${processedProducts.length} products found`}
-      </ResultsText>
+      <section style={{ padding: "40px 24px" }}>
+        <div className="container">
+          <ResultsText>
+            {processedProducts.length === 0
+              ? "No products found."
+              : `${processedProducts.length} products found`}
+          </ResultsText>
 
-      {viewMode === "grid" ? (
-        <GridWrapper>
-          {processedProducts.map((product) => (
-            <ProductCardGrid
-              key={product.id}
-              product={product}
-              onAddToCart={addToCart}
-            />
-          ))}
-        </GridWrapper>
-      ) : (
-        <ListWrapper>
-          {processedProducts.map((product) => (
-            <ProductCardList
-              key={product.id}
-              product={product}
-              onAddToCart={addToCart}
-            />
-          ))}
-        </ListWrapper>
-      )}
+          {viewMode === "grid" ? (
+            <GridWrapper>
+              {processedProducts.map((product) => (
+                <ProductCardGrid
+                  key={product.id}
+                  product={product}
+                  onAddToCart={addToCart}
+                />
+              ))}
+            </GridWrapper>
+          ) : (
+            <ListWrapper>
+              {processedProducts.map((product) => (
+                <ProductCardList
+                  key={product.id}
+                  product={product}
+                  onAddToCart={addToCart}
+                />
+              ))}
+            </ListWrapper>
+          )}
+        </div>
+      </section>
     </PageWrapper>
   );
 };

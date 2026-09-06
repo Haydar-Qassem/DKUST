@@ -4,6 +4,7 @@ function InputComponent(props) {
   const label = props.label;
   const placeholder = props.placeholder;
   const type = props.type;
+  const login = props.login;
   const value = props.value;
   const onChange = props.onChange;
   const icon = props.icon;
@@ -27,7 +28,29 @@ function InputComponent(props) {
 
   return (
     <InputComponentStyles>
-      <label htmlFor={label}>{label}</label>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          width: "100%",
+        }}
+      >
+        <label htmlFor={label}>{label}</label>
+        {login && (
+          <a
+            href="/forgot-password"
+            className="forgot-password-link"
+            style={{
+              color: "var(--color-green-600)",
+              fontSize: "var(--text-xs)",
+              fontWeight: "var(--font-weight-medium)",
+              lineHeight: "var(--text-xs--line-height)",
+            }}
+          >
+            Forgot Password?
+          </a>
+        )}
+      </div>
       <div className="login-input-group">
         {iconElement}
         <input

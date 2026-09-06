@@ -6,12 +6,13 @@ export const RegisterStyles = styled.div`
   align-items: center;
   justify-content: center;
   padding: 1rem 0rem;
+
   .terms-privacy {
     font-weight: bold;
-    color: var(--color-green);
+    color: var(--color-green-600);
     text-decoration: none;
     &:hover {
-      color: var(--color-green-hover);
+      color: var(--color-green-700);
     }
   }
 `;

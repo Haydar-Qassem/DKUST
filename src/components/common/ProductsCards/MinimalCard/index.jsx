@@ -20,13 +20,11 @@ export const MinimalCard = ({ product }) => {
         <ImageBox>
           <img src="/assets/box-icon.png" alt={product.name} />
         </ImageBox>
-        <ContentBox className="d-flex flex-column justify-content-between">
+        <ContentBox>
           <div>
             <Tag name={product.category} />
 
-            <CardHeader>
-              <h3>{product.name}</h3>
-            </CardHeader>
+            <CardHeader>{product.name}</CardHeader>
           </div>
           <ActionRow>
             <PriceBlock>

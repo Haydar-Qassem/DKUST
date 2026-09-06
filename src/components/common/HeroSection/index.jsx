@@ -1,8 +1,8 @@
 import { Banner, HeroSubtitle, HeroTitle } from "./styles";
 
-const HeroSection = ({ title, subtitle, badge }) => {
+const HeroSection = ({ title, subtitle, badge, height, background }) => {
   return (
-    <Banner>
+    <Banner style={{ height: height, background: background }}>
       <HeroTitle>{title}</HeroTitle>
       {subtitle && <HeroSubtitle>{subtitle}</HeroSubtitle>}
       {badge && <span>{badge}</span>}

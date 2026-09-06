@@ -1,14 +1,12 @@
 import styled from "styled-components";
 
 export const AuthCardStyles = styled.div`
-    max-width: 620px;
-    border-top: 5px solid var(--color-green);
-    background-color: var(--color-white);
-    border-radius: 1rem;
-    padding: 3rem 2.5rem;
-    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
-    border-top: 5px solid var(--color-green);
-
+  width: max(30vw, 300px);
+  border-top: 5px solid var(--color-green-500);
+  background-color: var(--color-white);
+  border-radius: 1rem;
+  padding: 3rem 2.5rem;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
 
   .login-header {
     text-align: center;

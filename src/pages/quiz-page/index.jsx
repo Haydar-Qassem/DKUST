@@ -1,7 +1,7 @@
 import { useState } from "react";
 import HeroSection from "../../components/common/HeroSection";
 import QuestionCard from "../../components/common/QuestionCard";
-import quizData from "../../Data/quizData/quizData.js";
+import questionsArray from "../../Data/quizData/quizData.js";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { SectionTitle, FeedbackWrapper, BadgeElement } from "./styles.js";
@@ -9,58 +9,56 @@ import CustomButton from "../../components/common/CustomButton/index.jsx";
 
 const QuizPage = () => {
   const navigate = useNavigate();
-  const { register, handleSubmit, reset } = useForm();
-  const [submittedAnswers, setSubmittedAnswers] = useState(null);
 
-  const onSubmit = (data) => {
-    setSubmittedAnswers(data);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [selectedOption, setSelectedOption] = useState("");
+  const [score, setScore] = useState(0);
+  const [showResult, setShowResult] = useState(false);
 
-  const onError = (errors) => {
-    alert("Please answer all questions before submitting.");
-  };
+  const handleNextQuestion = (e) => {
+    e.preventDefault();
 
-  let score = 0;
-  if (submittedAnswers) {
-    quizData.forEach((question) => {
-      if (submittedAnswers[question.id] === question.correctAnswer) {
-        score++;
-      }
-    });
-  }
-  const handleTryAgain = () => {
-    setSubmittedAnswers(null);
-    reset();
-  };
+    if (!selectedOption) {
+      alert("Please select an option before continuing.");
+      return;
+    }
 
-  let scoreStatus = "poor";
-  let feedbackTitle = "Keep Practicing!";
+    if (selectedOption === questionsArray[currentQuestion].answer) {
+      setScore(score + 1);
+    }
 
-  if (score === quizData.length) {
-    scoreStatus = "perfect";
-    feedbackTitle = "Perfect Score!";
-  } else if (score >= quizData.length / 2) {
-    scoreStatus = "good";
-    feedbackTitle = "Good Effort!";
-  }
-
-  let status = "not submitted";
-  let badgeTitle = `${quizData.length} Questions`;
-
-  if (submittedAnswers) {
-    badgeTitle = `Score: ${score} / ${quizData.length}`;
-
-    if (score === quizData.length) {
-      status = "perfect";
-    } else if (score >= quizData.length / 2) {
-      status = "good";
+    if (currentQuestion + 1 < questionsArray.length) {
+      setCurrentQuestion(currentQuestion + 1);
+      setSelectedOption("");
     } else {
-      status = "poor";
+      setShowResult(true);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  const handleTryAgain = () => {
+    setCurrentQuestion(0);
+    setSelectedOption("");
+    setScore(0);
+    setShowResult(false);
+  };
+
+  let scoreStatus = "not-yet-graded";
+  let feedbackTitle = "Keep Practicing!";
+  let badgeTitle = `${questionsArray.length} Questions`;
+
+  if (showResult) {
+    badgeTitle = `Score: ${score} / ${questionsArray.length}`;
+    if (score === questionsArray.length) {
+      scoreStatus = "perfect";
+      feedbackTitle = "Perfect Score!";
+    } else if (score >= questionsArray.length / 2) {
+      scoreStatus = "good";
+      feedbackTitle = "Good Effort!";
     }
   }
 
-  const Badge = <BadgeElement status={status}>{badgeTitle}</BadgeElement>;
+  const Badge = <BadgeElement status={scoreStatus}>{badgeTitle}</BadgeElement>;
 
   return (
     <div>
@@ -68,42 +66,46 @@ const QuizPage = () => {
         title="Test Your Knowledge"
         subtitle="Answer the questions below and click Submit to check your score."
         badge={Badge}
+        height="335px"
+        background="linear-gradient(135deg, rgb(13, 27, 62) 0%, rgb(26, 58, 110) 50%, rgb(13, 27, 62) 100%)"
       />
       <div style={{ backgroundColor: `var(--color-gray-bg)`, margin: `0` }}>
         <div className="container d-flex flex-column align-items-center justify-content-center py-5">
-          <SectionTitle>Choose the Correct Answer</SectionTitle>
-          <form
-            onSubmit={handleSubmit(onSubmit, onError)}
-            className="container d-flex flex-column align-items-center justify-content-center"
-          >
-            {quizData.map((question, index) => (
-              <QuestionCard
-                key={index}
-                questionData={question}
-                registerFn={register}
-                submittedAnswer={
-                  submittedAnswers ? submittedAnswers[question.id] : undefined
-                }
-              />
-            ))}
-            {!submittedAnswers && (
-              <div>
+          {!showResult ? (
+            <>
+              <SectionTitle>
+                Question {currentQuestion + 1} of {questionsArray.length}
+              </SectionTitle>
+              <form
+                onSubmit={handleNextQuestion}
+                className="container d-flex flex-column align-items-center justify-content-center"
+              >
+                <QuestionCard
+                  questionData={questionsArray[currentQuestion]}
+                  selectedOption={selectedOption}
+                  setSelectedOption={setSelectedOption}
+                />
+
                 <CustomButton
-                  content="Submit Quiz"
-                  id="submit-quiz-button"
-                  bgColor="var(--color-green)"
+                  type="submit"
+                  content={
+                    currentQuestion + 1 === questionsArray.length
+                      ? "Submit Quiz"
+                      : "Next Question"
+                  }
+                  id="next-question-button"
+                  bgColor="var(--color-green-600)"
                   color="var(--color-white)"
-                  bgColorHover="var(--color-green-hover)"
+                  bgColorHover="var(--color-green-700)"
                   borderRadius="0.375rem"
                   border="none"
                   py="12px"
                   px="40px"
-                  style={{ minWidth: "150px" }}
+                  style={{ minWidth: "150px", marginTop: "20px" }}
                 />
-              </div>
-            )}
-          </form>
-          {submittedAnswers && (
+              </form>
+            </>
+          ) : (
             <>
               <FeedbackWrapper
                 $status={scoreStatus}
@@ -111,17 +113,18 @@ const QuizPage = () => {
               >
                 <h2 style={{ fontSize: "24px" }}>{feedbackTitle}</h2>
                 <p style={{ marginBottom: "0" }}>
-                  You answered {score} out of {quizData.length} questions
+                  You answered {score} out of {questionsArray.length} questions
                   correctly.
                 </p>
               </FeedbackWrapper>
-              <div className="d-flex gap-3">
+
+              <div className="d-flex gap-3 mt-4">
                 <CustomButton
                   content="Try Again"
                   id="try-again-button"
-                  bgColor="var(--color-green)"
+                  bgColor="var(--color-green-600)"
                   color="var(--color-white)"
-                  bgColorHover="var(--color-green-hover)"
+                  bgColorHover="var(--color-green-700)"
                   borderRadius="var(--radius)"
                   py="12px"
                   px="40px"
@@ -129,8 +132,8 @@ const QuizPage = () => {
                   onClick={handleTryAgain}
                 />
                 <CustomButton
-                  content="Back to FAQ"
-                  id="back-to-faq-button"
+                  content="Back to Home"
+                  id="back-to-home-button"
                   bgColor="transparent"
                   color="var(--color-gray-700)"
                   borderRadius="var(--radius)"

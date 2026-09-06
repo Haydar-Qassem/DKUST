@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const PageWrapper = styled.div`
   display: flex;
@@ -9,25 +9,37 @@ export const PageWrapper = styled.div`
 
 export const CategoryList = styled.div`
   display: flex;
-  gap: 1rem;
+  gap: calc(var(--spacing) * 2);
   flex-wrap: wrap;
 `;
 
 export const CategoryButton = styled.button`
-  padding: 0.5rem 1.5rem;
-  border: 1px solid ${(props) => (props.active ? "#00a843" : "#d1d1d1")};
-  background-color: ${(props) => (props.active ? "#00a843" : "transparent")};
-  color: ${(props) => (props.active ? "#ffffff" : "#333333")};
+  padding: 6px 16px;
+  border: 1px solid
+    ${(props) =>
+      props.active ? "var(--color-green-600)" : "var(--color-gray-300)"};
+  background-color: ${(props) =>
+    props.active ? "var(--color-green-600)" : "var(--color-white)"};
+  color: ${(props) =>
+    props.active ? "var(--color-white)" : "var(--color-gray-600)"};
   border-radius: 20px;
   cursor: pointer;
   font-weight: 500;
   transition: all 0.3s ease;
+  font-size: 12px;
+
+  &:hover {
+    border-color: ${(props) =>
+      props.active ? "var(--color-green-600)" : "var(--color-green-500)"};
+    color: ${(props) =>
+      props.active ? "var(--color-white)" : "var(--color-green-600)"};
+  }
 `;
 
 export const ViewControls = styled.div`
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: calc(var(--spacing) * 3);
 `;
 
 export const SortContainer = styled.div`
@@ -35,18 +47,19 @@ export const SortContainer = styled.div`
 `;
 
 export const SortButton = styled.div`
-  padding: 0.5rem 1rem;
+  padding: 8px 12px;
   border: 1px solid ${(props) => (props.isOpen ? "#00a843" : "#d1d1d1")};
-  border-radius: 8px;
+  border-radius: 10px;
   background-color: white;
-  color: #666;
+  color: var(--color-gray-600);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  font-size: 0.9rem;
-  min-width: 180px;
+  gap: normal;
+  font-size: 12px;
+  min-width: 142px;
+  font-weight: 400;
 `;
 
 export const DropdownMenu = styled.ul`
@@ -96,18 +109,18 @@ export const ToggleBtn = styled.button`
 `;
 
 export const ResultsText = styled.div`
-  padding: 1rem 5%;
-  font-weight: 600;
-  color: #666666;
+  color: var(--color-gray-400);
+  font-size: var(--text-xs);
+  margin-bottom: 20px;
+  line-height: var(--text-xs--line-height);
 `;
 
 export const GridWrapper = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
+  // max-width: 1200px;
+  margin: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  padding: 1rem 5% 4rem;
+  gap: calc(var(--spacing) * 6);
 
   @media (max-width: 1024px) {
     grid-template-columns: repeat(2, 1fr);
@@ -119,79 +132,119 @@ export const GridWrapper = styled.div`
 `;
 
 export const ListWrapper = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  padding: 1rem 5% 4rem;
+  row-gap: 16px;
 `;
 
 export const CardContainer = styled.div`
+  padding: ${(props) => (props.layout == "grid" ? "0px" : "20px")};
+
   border: 1px solid #eeeeee;
-  border-radius: 12px;
-  overflow: hidden;
-  display: ${(props) => (props.layout === "list" ? "flex" : "block")};
+  border-radius: 14px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  position: relative;
-  background-color: #ffffff;
+  background-color: var(--color-white);
+  gap: 20px;
+
+  ${(props) => {
+    if (props.layout === "grid") {
+      return css`
+        display: block;
+      `;
+    } else {
+      return css`
+        display: flex;
+        //justify-content: space-between;
+      `;
+    }
+  }}
 `;
 
 export const ImageBox = styled.div`
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
   background-color: #0b3b24;
-  height: ${(props) => (props.layout === "list" ? "auto" : "200px")};
-  width: ${(props) => (props.layout === "list" ? "250px" : "100%")};
+  height: ${(props) =>
+    props.layout === "list" ? "calc(var(--spacing) * 24);" : "160px"};
+  width: ${(props) =>
+    props.layout === "list" ? "calc(var(--spacing) * 24);" : "100%"};
+  ${(props) =>
+    props.layout === "list" ? "border-radius: calc(var(--radius) + 4px);" : ""}
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-shrink: 0;
 `;
 
 export const ContentBox = styled.div`
-  padding: 1.5rem;
-  flex: 1;
+  padding: ${(props) => (props.layout == "list" ? "0px" : "20px")};
   display: flex;
   flex-direction: column;
+  ${(props) => (props.layout === "list" ? "" : "height: 200px;")}
 `;
 
 export const BadgeItem = styled.span`
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  background-color: #00e676;
-  color: #ffffff;
-  padding: 0.25rem 0.75rem;
+  font-size: var(--text-xs);
+  line-height: var(--text-xs--line-height);
+  font-weight: 600;
   border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: bold;
+
+  ${(props) => {
+    if (props.layout === "list") {
+      return css`
+        padding: 2px 8px;
+        margin-bottom: 4px;
+        color: var(--color-green-700);\
+        background-color: var(--color-green-100);
+        `;
+    } else {
+      return css`
+        position: absolute;
+        top: 12px;
+        left: 12px;
+
+        padding: 2px 10px;
+        color: var(--color-white);
+        background-color: var(--color-green-500);
+      `;
+    }
+  }}
 `;
 
 export const CardHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
 `;
 
 export const DescriptionText = styled.p`
-  color: #666;
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
+  color: var(--color-gray-500);
+  font-size: var(--text-xs);
+  line-height: var(--text-xs--line-height);
+  margin: 0;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  line-height: 1.4;
+  min-height: 2rem;
+
+  ${(props) => {
+    if (props.layout === "list") {
+      return css`
+        font-size: var(--text-sm);
+        line-height: var(--text-sm--line-height);
+        margin-top: 8px;
+      `;
+    }
+  }}
 `;
 
 export const ActionRow = styled.div`
   display: flex;
   gap: 1rem;
-  margin-top: auto;
-  padding-top: 1.5rem;
-  justify-content: ${(props) =>
-    props.layout === "list" ? "flex-end" : "space-between"};
+  margin-top: ${(props) => (props.layout === "list" ? "12px" : "16px")};
+  justify-content: space-between;
   align-items: center;
 `;
 
@@ -201,36 +254,73 @@ export const PriceBlock = styled.div`
 `;
 
 export const PriceAmount = styled.span`
-  font-size: 1.4rem;
   font-weight: 700;
-  color: #00a843;
+  color: var(--color-green-600);
+
+  font-size: var(--text-base);
+  line-height: 24px;
+
+  ${(props) => {
+    if (props.layout === "list") {
+      return css`
+        font-size: var(--text-lg);
+        line-height: 28px;
+      `;
+    }
+  }}
 `;
 
 export const PriceMonth = styled.span`
-  font-size: 0.9rem;
-  color: #888;
+  font-size: var(--text-xs);
+  line-height: var(--text-xs--line-height);
+  color: var(--color-gray-400);
 `;
 
 export const ActionButton = styled.button`
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: var(--radius);
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 0.4rem;
   transition: all 0.2s ease;
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--text-xs--line-height);
 
-  ${(props) =>
-    props.variant === "outline"
-      ? `
-    background-color: transparent;
-    border: 1px solid #d1d1d1;
-    color: #333;
-  `
-      : `
-    background-color: #00a843;
-    border: 1px solid #00a843;
-    color: #fff;
-  `}
+  ${(props) => {
+    if (props.variant === "outline") {
+      return css`
+        background-color: transparent;
+        border: 1px solid var(--color-gray-300);
+        color: var(--color-gray-600);
+
+        &:hover {
+          border-color: var(--color-green-500);
+          color: var(--color-green-600);
+        }
+      `;
+    } else if (props.variant === "green") {
+      return css`
+        background-color: var(--color-green-600);
+        color: var(--color-white);
+
+        &:hover {
+          background-color: var(--color-green-700);
+        }
+      `;
+    } else if (props.variant === "green-outline") {
+      return css`
+        color: var(--color-green-600);
+        border: 1px solid var(--color-green-600);
+        background-color: transparent;
+
+        &:hover {
+          background-color: #00a843;
+          border: 1px solid #00a843;
+          color: #fff;
+        }
+      `;
+    }
+  }}
 `;

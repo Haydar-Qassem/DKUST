@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const CardContainer = styled.div`
   margin-top: 30px;
@@ -22,20 +22,25 @@ export const ImageBox = styled.div`
 export const ContentBox = styled.div`
   height: 100%;
   width: 50em;
-  padding: 1rem;
+  padding: 32px;
 `;
 
-export const CardHeader = styled.div`
+export const CardHeader = styled.h3`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 0.5rem;
+  margin-bottom: 8px;
+  color: var(--color-gray-900);
+  font-size: var(--text-2xl);
+  line-height: var(--text-2xl--line-height);
+  font-weight: var(--font-weight-bold);
 `;
 
 export const DescriptionText = styled.p`
-  color: #666;
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
+  color: var(--color-gray-600);
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  margin-bottom: calc(var(--spacing) * 6);
 `;
 
 export const ActionRow = styled.div`
@@ -52,14 +57,16 @@ export const PriceBlock = styled.div`
 `;
 
 export const PriceAmount = styled.span`
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #00a843;
+  font-weight: var(--font-weight-bold);
+  font-size: var(--text-3xl);
+  line-height: var(--tw-leading, var(--text-3xl--line-height));
+  color: var(--color-green-600);
 `;
 
 export const PriceMonth = styled.span`
-  font-size: 0.9rem;
-  color: #888;
+  font-size: var(--text-sm);
+  line-height: var(--tw-leading, var(--text-sm--line-height));
+  color: var(--color-gray-400);
 `;
 
 export const ActionButton = styled.button`
@@ -74,40 +81,58 @@ export const ActionButton = styled.button`
   transition: all 0.2s ease;
 
   ${(props) => {
-    const variant = props.variant;
-    switch (variant) {
-      case "green":
-        return `
-          background-color: var(--color-green);
-          border: 1px solid var(--color-green);
-          color: #fff;
-  `;
-      case "white":
-        return `
-          background-color: transparent;
-        border: 1px solid var(--color-green);
-        color:  var(--color-green);
-        `;
-      case "outline":
-        return `
-          background-color: transparent;
-          border: 1px solid #d1d1d1;
-          color: #333;
-  `;
+    if (props.variant === "outline") {
+      return css`
+        background-color: transparent;
+        border: 1px solid var(--color-gray-300);
+        color: var(--color-gray-600);
+
+        &:hover {
+          border-color: var(--color-green-500);
+          color: var(--color-green-600);
+        }
+      `;
+    } else if (props.variant === "green") {
+      return css`
+        background-color: var(--color-green-600);
+        color: var(--color-white);
+
+        &:hover {
+          background-color: var(--color-green-700);
+        }
+      `;
+    } else if (props.variant === "green-outline") {
+      return css`
+        color: var(--color-green-600);
+        border: 1px solid var(--color-green-600);
+        background-color: transparent;
+
+        &:hover {
+          background-color: var(--color-green-50);
+          border: 1px solid var(--color-green-600);
+          color: var(--color-green-600);
+        }
+      `;
     }
   }}
 `;
 
-export const BadgeItem = styled.span`
-  background-color: #00e676;
-  color: #ffffff;
-  padding: 0.25rem 0.75rem;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: bold;
-`;
-
 export const FeaturesList = styled.ul`
+  color: var(--color-gray-700);
+  font-size: var(--text-sm);
+  line-height: var(--tw-leading, var(--text-sm--line-height));
   list-style-type: disc;
   list-style-position: inside;
+`;
+
+export const BadgeItem = styled.span`
+  font-size: var(--text-xs);
+  line-height: var(--text-xs--line-height);
+
+  font-weight: var(--font-weight-bold);
+  border-radius: 12px;
+  margin-top: 16px;
+  padding: 4px 16px;
+  background-color: var(--color-green-500);
+  color: var(--color-white);
 `;

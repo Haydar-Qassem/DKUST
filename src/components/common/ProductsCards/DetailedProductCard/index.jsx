@@ -19,19 +19,25 @@ export const DetailedProductCard = ({ product }) => {
   return (
     <>
       <CardContainer className="container">
-        {/* {product.badge && <BadgeItem>{product.badge}</BadgeItem>} */}
         <ImageBox>
-          <img src="/assets/box-icon.png" alt={product.name} />
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100%",
+            }}
+          >
+            <img src="/assets/box-icon.png" alt={product.name} />
+            {product.badge && <BadgeItem>{product.badge}</BadgeItem>}
+          </div>
         </ImageBox>
         <ContentBox className="d-flex flex-column justify-content-between">
           <div>
             <Tag name={product.category} variant="boxedTag" />
 
-            <CardHeader>
-              <h3 style={{ margin: "0.5rem 0 0 0", color: "#1a1a1a" }}>
-                {product.name}
-              </h3>
-            </CardHeader>
+            <CardHeader>{product.name}</CardHeader>
 
             <div
               style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
@@ -50,7 +56,15 @@ export const DetailedProductCard = ({ product }) => {
             <DescriptionText>{product.description}</DescriptionText>
             <FeaturesList>
               {product?.features?.map((feature, index) => (
-                <li key={index}>{feature}</li>
+                <li
+                  key={index}
+                  style={{
+                    marginBottom: "8px",
+                    gap: "calc(var(--spacing) * 2)",
+                  }}
+                >
+                  {feature}
+                </li>
               ))}
             </FeaturesList>
           </div>
@@ -85,7 +99,7 @@ export const DetailedProductCard = ({ product }) => {
                 onClick={() => {
                   console.log("buy now");
                 }}
-                variant="white"
+                variant="green-outline"
                 style={{ flex: 1 }}
               >
                 Buy Now

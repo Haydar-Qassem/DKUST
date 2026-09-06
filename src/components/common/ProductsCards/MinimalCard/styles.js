@@ -11,30 +11,31 @@ export const CardContainer = styled.div`
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   padding-left: 0;
   background-color: #ffffff;
-  min-height: 400px;
 `;
 
 export const ImageBox = styled.div`
   background-color: #0b3b24;
   width: 50em;
-  height: 55%;
+  height: calc(var(--spacing) * 28);
 `;
 
 export const ContentBox = styled.div`
-  height: 45%;
+  // display: flex;
+  // flex-direction: column;
+  // height: auto;
+  // justify-content: space-between;
   width: 50em;
-  padding: 1rem;
+  padding: 16px;
+  border-color: var(--border);
 `;
 
-export const CardHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  h3 {
-    font-size: 1em;
-    margin: 0.5rem 0 0;
-    color: #1a1a1a;
-  }
+export const CardHeader = styled.h4`
+  font-size: var(--text-sm);
+  line-height: var(--text-sm--line-height);
+  font-weight: var(--font-weight-semibold);
+  margin: 0;
+  padding: 0;
+  color: var(--color-gray-800);
 `;
 
 export const DescriptionText = styled.p`
@@ -44,11 +45,10 @@ export const DescriptionText = styled.p`
 `;
 
 export const ActionRow = styled.div`
-  display: flex;
-  gap: 1rem;
-  margin-top: auto;
-  padding-top: 1.5rem;
-  align-items: center;
+  margin-top: 8px;
+  font-size: var(--text-sm);
+  line-height: var(--text-sm--line-height);
+  font-weight: var(--font-weight-bold);
 `;
 
 export const PriceBlock = styled.div`
@@ -57,14 +57,14 @@ export const PriceBlock = styled.div`
 `;
 
 export const PriceAmount = styled.span`
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #00a843;
+  color: var(--color-green-600);
 `;
 
 export const PriceMonth = styled.span`
-  font-size: 0.9rem;
-  color: #888;
+  color: var(--color-gray-400);
+  font-size: var(--text-xs);
+  line-height: var(--tw-leading, var(--text-xs--line-height));
+  font-weight: var(--font-weight-normal);
 `;
 
 export const ActionButton = styled.button`

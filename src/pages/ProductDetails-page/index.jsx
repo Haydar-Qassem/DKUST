@@ -150,18 +150,50 @@ export const ProductDetailsPage = () => {
 
   return (
     <>
-      <FilterBar>
-        <div>
-          <span style={{ color: `var(--color-text-gray)` }}>
-            Home / Products /{" "}
+      <FilterBar style={{ backgroundColor: "var(--color-white)" }}>
+        <div
+          className="container"
+          style={{
+            color: "var(--color-gray-700)",
+            fontSize: "var(--text-xs)",
+            lineHeight: "var(--text-xs--line-height)",
+            fontWeight: "var(--font-weight-medium)",
+          }}
+        >
+          <span style={{ color: `var(--color-gray-400)` }}>
+            <span
+              style={{
+                fontSize: "var(--text-base)",
+                fontWeight: "var(--font-weight-medium)",
+              }}
+            >
+              Home{" "}
+            </span>
+            /
+            <span
+              style={{
+                fontSize: "var(--text-base)",
+                fontWeight: "var(--font-weight-medium)",
+              }}
+            >
+              {" "}
+              Products{" "}
+            </span>
+            /{" "}
           </span>
           {product.name}
         </div>
       </FilterBar>
-      <div style={{ backgroundColor: `var(--color-gray-bg)`, margin: `0` }}>
+      <div style={{ backgroundColor: `#F7F8FC`, margin: `0` }}>
         <div className="container pt-5" onClick={() => navigate(`/products`)}>
           <span
-            style={{ color: `var(--color-text-gray)`, cursor: `pointer` }}
+            style={{
+              color: `var(--color-gray-500)`,
+              cursor: `pointer`,
+              fontSize: "var(--text-sm)",
+              lineHeight: "var(--text-sm--line-height)",
+              fontWeight: "var(--font-weight-medium)",
+            }}
             onClick={() => {
               console.log("return to the product page");
             }}

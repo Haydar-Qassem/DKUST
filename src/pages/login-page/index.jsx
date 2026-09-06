@@ -1,21 +1,37 @@
 import React, { useState } from "react";
-// import InputComponent from "D:/FrontEnd Course/my-first-app/src/components/common/InputComponent/index.jsx"
+import * as Yup from "yup";
+import { useFormik } from "formik";
 import InputComponent from "../../../src/components/common/InputComponent/index.jsx";
 import CustomButton from "../../../src/components/common/CustomButton/index.jsx";
 import SocialButton from "../../../src/components/common/SocialButton/index.jsx";
 import AuthCard from "../../../src/components/common/AuthCard/index.jsx";
+import { Main } from "./styles.js";
+
+const loginSchema = Yup.object({
+  email: Yup.string()
+    .email("Invalid email format")
+    .required("Email is required"),
+  password: Yup.string().required("Password is required"),
+});
 
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState(false);
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: loginSchema,
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
 
   const handleLogin = (e) => {
     e.preventDefault();
     const userData = {
-      email: email,
-      password: password,
-      rememberMe: rememberMe,
+      email: formik.values.email,
+      password: formik.values.password,
+      rememberMe: formik.values.rememberMe,
     };
     console.log(userData);
   };
@@ -28,7 +44,7 @@ function Login() {
   };
 
   return (
-    <main className="login-wrapper d-flex flex-column align-items-center justify-content-center py-5">
+    <Main>
       <AuthCard
         title="Welcome Back"
         subtitle="Sign in to your DKUST account"
@@ -39,18 +55,21 @@ function Login() {
           type="email"
           label="Email-Address"
           placeholder="you@example.com"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          value={formik.values.email}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           icon="fa-regular fa-envelope"
         />
 
         {/* Password */}
         <InputComponent
+          login
           type="password"
           label="Password"
           placeholder="Min. 6 characters"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={formik.values.password}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
           icon="fa-solid fa-lock"
           icon2="fa-regular fa-eye"
         />
@@ -61,16 +80,32 @@ function Login() {
           id="signInBtn"
           classN="form-submit-btn"
           width="100%"
-          bgColor="var(--color-green)"
+          bgColor="var(--color-green-600)"
           color="var(--color-white)"
-          bgColorHover="var(--color-green-hover)"
-          borderRadius= "0.325rem"
-          border= "none"
+          bgColorHover="var(--color-green-700)"
+          borderRadius="0.325rem"
+          border="none"
           py="12px"
         />
 
-        <div className="center-in-login-card">
-          <div className="or-continue-with">or continue with</div>
+        <div
+          className="center-in-login-card"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <span
+            style={{
+              marginBottom: "16px",
+              color: "var(--color-gray-400)",
+              fontSize: "var(--text-xs)",
+              lineHeight: "var(--tw-leading, var(--text-xs--line-height))",
+            }}
+          >
+            or continue with
+          </span>
         </div>
 
         <div className="login-social-group">
@@ -89,9 +124,16 @@ function Login() {
         </div>
 
         {/* Sign Up Link */}
-        <div className="login-signup-text">
+        <div
+          className="login-signup-text"
+          style={{ color: "var(--color-gray-400)" }}
+        >
           Don't have an account?{" "}
-          <a href="/signup" className="login-signup-link">
+          <a
+            href="/signup"
+            className="login-signup-link"
+            style={{ color: "var(--color-green-600)" }}
+          >
             Sign up
           </a>
         </div>
@@ -104,7 +146,7 @@ function Login() {
       >
         Back to Home
       </a>
-    </main>
+    </Main>
   );
 }
 

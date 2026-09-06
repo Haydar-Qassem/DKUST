@@ -43,14 +43,23 @@ export const BadgeElement = styled.div`
   border: none;
   border-radius: 1.5rem;
   padding: 8px 24px;
-  font-size: 14px;
+  font-size: var(--text-sm);
+  line-height: var(--tw-leading, var(--text-sm--line-height));
   color: var(--color-gray-700);
-  min-width: 135px;
-  font-weight: bold;
-  font-size: 16px;
-
 
   ${({ status }) => {
+    if (status === "not-yet-graded") {
+      return css`
+        background-color: color-mix(
+          in oklab,
+          var(--color-white) 20%,
+          transparent
+        );
+        // border: 1px solid var(--color-red-300);
+        color: var(--color-white);
+      `;
+    }
+
     if (status === "poor") {
       return css`
         background-color: var(--color-red-500);

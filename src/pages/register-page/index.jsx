@@ -1,30 +1,56 @@
 import React, { useState } from "react";
+import * as Yup from "yup";
 import InputComponent from "../../../src/components/common/InputComponent/index.jsx";
 import CustomButton from "../../../src/components/common/CustomButton/index.jsx";
 import SocialButton from "../../../src/components/common/SocialButton/index.jsx";
 import AuthCard from "../../../src/components/common/AuthCard/index.jsx";
 import { RegisterStyles } from "./styles";
+import { useFormik } from "formik";
+
+const registerSchema = Yup.object({
+  firstName: Yup.string().required("First name is required"),
+  lastName: Yup.string().required("Last name is required"),
+  email: Yup.string()
+    .email("Invalid email format")
+    .required("Email is required"),
+  password: Yup.string()
+    .min(6, "Password must be at least 6 characters")
+    .required("Password is required"),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref("password"), null], "Passwords must match")
+    .required("Confirm password is required"),
+  isAgreed: Yup.boolean().oneOf(
+    [true],
+    "You must agree to the terms and conditions",
+  ),
+});
 
 function Register() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [agreeTerms, setAgreeTerms] = useState(false);
-
   const handleRegister = (e) => {
     e.preventDefault();
     const userData = {
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      password: password,
-      confirmPassword: confirmPassword,
-      agreeTerms: agreeTerms,
+      firstName: formik.values.firstName,
+      lastName: formik.values.lastName,
+      email: formik.values.email,
+      password: formik.values.password,
+      confirmPassword: formik.values.confirmPassword,
+      isAgreed: formik.values.isAgreed,
     };
     console.log(userData);
   };
+
+  const formik = useFormik({
+    initialValues: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      isAgreed: false,
+    },
+    validationSchema: registerSchema,
+    onSubmit: handleRegister,
+  });
 
   const signInWithGoogle = () => console.log("Sign in with Google");
   const signInWithFB = () => console.log("Sign in with Facebook");
@@ -34,7 +60,7 @@ function Register() {
   };
 
   return (
-    <main className="login-wrapper py-5">
+    <main className="py-5" style={{ backgroundColor: "rgb(26, 58, 110)" }}>
       <RegisterStyles>
         <AuthCard title="Create Account" subtitle="" onSubmit={handleRegister}>
           <div className="d-flex flex-row gap-3">
@@ -43,8 +69,9 @@ function Register() {
               type="text"
               label="First Name"
               placeholder="John"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
+              value={formik.values.firstName}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
 
             {/* Last Name */}
@@ -52,8 +79,9 @@ function Register() {
               type="text"
               label="Last Name"
               placeholder="Doe"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
+              value={formik.values.lastName}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
             />
           </div>
 
@@ -62,8 +90,9 @@ function Register() {
             type="email"
             label="Email Address"
             placeholder="you@example.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             icon="fa-regular fa-envelope"
           />
 
@@ -72,8 +101,9 @@ function Register() {
             type="password"
             label="Password"
             placeholder="Min. 6 characters"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             icon2="fa-regular fa-eye"
           />
 
@@ -82,8 +112,9 @@ function Register() {
             type="password"
             label="Confirm Password"
             placeholder="Confirm your password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
+            value={formik.values.confirmPassword}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
             icon2="fa-regular fa-eye"
           />
 
@@ -93,8 +124,8 @@ function Register() {
               type="checkbox"
               className="form-check-input"
               id="agreeTerms"
-              checked={agreeTerms}
-              onChange={(e) => setAgreeTerms(e.target.checked)}
+              checked={formik.values.agreeTerms}
+              onChange={formik.handleChange}
             />
             <label className="form-check-label" htmlFor="agreeTerms">
               I agree to the{" "}
@@ -106,6 +137,13 @@ function Register() {
                 Privacy Policy
               </a>
             </label>
+            {formik.touched.isAgreed && formik.errors.isAgreed ? (
+              <div
+                style={{ color: "red", fontSize: "0.8rem", marginTop: "5px" }}
+              >
+                {formik.errors.isAgreed}
+              </div>
+            ) : null}
           </div>
 
           {/* Submit */}
@@ -114,16 +152,32 @@ function Register() {
             id="registerBtn"
             classN="form-submit-btn"
             width="100%"
-            bgColor="var(--color-green)"
+            bgColor="var(--color-green-600)"
             color="var(--color-white)"
-            bgColorHover="var(--color-green-hover)"
-            borderRadius= "0.375rem"
+            bgColorHover="var(--color-green-700)"
+            borderRadius="0.375rem"
             border="none"
             py="12px"
           />
 
-          <div className="center-in-login-card">
-            <div className="or-continue-with">or sign up with</div>
+          <div
+            className="center-in-login-card"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <span
+              style={{
+                marginBottom: "16px",
+                color: "var(--color-gray-400)",
+                fontSize: "var(--text-xs)",
+                lineHeight: "var(--tw-leading, var(--text-xs--line-height))",
+              }}
+            >
+              or sign up with
+            </span>
           </div>
 
           <div className="login-social-group">
@@ -144,7 +198,11 @@ function Register() {
           {/* Sign Up Link */}
           <div className="login-signup-text">
             Don't have an account?{" "}
-            <a href="/signup" className="login-signup-link">
+            <a
+              href="/signup"
+              className="login-signup-link"
+              style={{ color: "var(--color-green-600)" }}
+            >
               Sign up
             </a>
           </div>
