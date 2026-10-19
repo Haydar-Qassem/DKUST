@@ -5,11 +5,11 @@ export const HeaderStyles = styled.header`
   top: 0;
   z-index: 1000;
 
-
-  background-color: rgb(13, 27, 62);
+  background-color: var(--bg-header);
   color: var(--color-gray-300);
 
-  ul {
+  ul,
+  ul div {
     display: flex;
     align-items: center;
     gap: calc(var(--spacing) * 5);
@@ -52,11 +52,44 @@ export const HeaderButton = styled.button`
   }
 `;
 
-
 export const Logo = styled.span`
   font-size: var(--text-xl);
   letter-spacing: 2px;
   font-weight: 700;
   line-height: var(--text-xl--line-height);
   color: var(--color-white);
+`;
+
+export const HeaderActions = styled.div`
+  display: flex;
+  align-items: center;
+  gap: calc(var(--spacing) * 3);
+`;
+
+export const ThemeToggle = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid var(--color-gray-500);
+  background: transparent;
+  color: var(--color-gray-300);
+  cursor: pointer;
+  font-size: 16px;
+
+  &:hover {
+    border-color: var(--color-green-400);
+    color: var(--color-green-400);
+  }
+`;
+
+export const UserLabel = styled.span`
+  color: var(--color-gray-300);
+  font-size: var(--text-xs);
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;

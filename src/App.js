@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React from "react";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import Header from "./components/common/header";
 import Footer from "./components/common/footer";
 import Login from "./pages/login-page";
@@ -7,8 +7,15 @@ import Register from "./pages/register-page";
 import Products from "./pages/products-page";
 import { ProductDetailsPage } from "./pages/ProductDetails-page";
 import QuizPage from "./pages/quiz-page";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser } from "./store/auth/authSelectors";
+import { logout } from "./store/auth/authSlice";
+import Logout from "./pages/logout-page";
 
 export default function App() {
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
+
   return (
     <BrowserRouter>
       <div className="d-flex flex-column min-vh-100">
@@ -75,6 +82,16 @@ export default function App() {
             />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/logout" element={<Logout />} />
+            <Route
+              path="/profile"
+              element={
+                <div className="container mt-5 text-center">
+                  <h2>Profile</h2>
+                  <p>Welcome, {user?.name}!</p>
+                </div>
+              }
+            />
             <Route path="/products/:id" element={<ProductDetailsPage />} />
             <Route
               path="*"

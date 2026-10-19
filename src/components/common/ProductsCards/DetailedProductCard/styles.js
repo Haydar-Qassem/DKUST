@@ -10,7 +10,7 @@ export const CardContainer = styled.div`
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   // position: relative;
   padding-left: 0;
-  background-color: #ffffff;
+  background-color: var(--color-white);
   height: minmax(400px, auto);
 `;
 

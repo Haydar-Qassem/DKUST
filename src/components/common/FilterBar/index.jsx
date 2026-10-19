@@ -9,5 +9,5 @@ export const FilterBar = styled.div`
   position: sticky;
   top: 64px;
   z-index: 999;
-  background-color: #f7f8fc;
+  background-color: var(--color-gray-50);
 `;

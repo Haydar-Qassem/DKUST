@@ -1,7 +1,21 @@
 import { Link, NavLink } from "react-router-dom";
-import { HeaderButton, HeaderStyles, Logo } from "./styles";
+import {
+  HeaderActions,
+  HeaderButton,
+  HeaderStyles,
+  Logo,
+  ThemeToggle,
+  UserLabel,
+} from "./styles";
+import { useTheme } from "../../../Context/Theme/useTheme";
+import { FiMoon, FiSun } from "react-icons/fi";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser } from "../../../store/auth/authSelectors";
 
 export default function Header() {
+  const { theme, toggleTheme } = useTheme();
+  const user = useSelector(selectUser);
+
   return (
     <HeaderStyles>
       <div
@@ -45,15 +59,45 @@ export default function Header() {
               <NavLink to="/contact">CONTACT</NavLink>
             </li>
             <li>
-              <Link to="/login" className="header-btn">
-                <HeaderButton>LOGIN</HeaderButton>
-              </Link>
+              <button onClick={toggleTheme}>{theme}</button>
             </li>
             <li>
-              <Link to="/register" className="header-btn">
-                <HeaderButton>REGISTER</HeaderButton>
-              </Link>
+              <HeaderActions>
+                <ThemeToggle type="button" onClick={toggleTheme}>
+                  {theme === "dark" ? <FiSun /> : <FiMoon />}
+                </ThemeToggle>
+              </HeaderActions>
             </li>
+            {user ? (
+              <div style={{ display: "flex" }}>
+                <li>
+                  <Link to="/logout" className="header-btn">
+                    <HeaderButton>LOGOUT</HeaderButton>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/profile" className="header-btn">
+                    <HeaderButton>PROFILE</HeaderButton>
+                  </Link>
+                </li>
+                <li>
+                  <UserLabel>Welcome, {user.name}!</UserLabel>
+                </li>
+              </div>
+            ) : (
+              <div style={{ display: "flex" }}>
+                <li>
+                  <Link to="/login" className="header-btn">
+                    <HeaderButton>LOGIN</HeaderButton>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/register" className="header-btn">
+                    <HeaderButton>REGISTER</HeaderButton>
+                  </Link>
+                </li>
+              </div>
+            )}
           </ul>
         </nav>
       </div>

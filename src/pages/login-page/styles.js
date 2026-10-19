@@ -7,5 +7,5 @@ export const Main = styled.main`
   justify-content: center;
   min-height: 100vh;
   padding: 64px 16px;
-  background-color: rgb(26, 58, 110);
+  background-color: var(--bg-blue-accent);
 `;

@@ -207,7 +207,7 @@ const ProductsPage = () => {
         title="Our Products"
         subtitle="Explore our range of software, AI tools, hardware kits, and robotics solutions built for modern teams."
         height="204px"
-        background="linear-gradient(135deg, rgb(13, 27, 62) 0%, rgb(26, 58, 110) 50%, rgb(13, 27, 62) 100%)"
+        background="var(--bg-hero)"
       />
 
       <FilterBar>

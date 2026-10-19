@@ -4,7 +4,7 @@ export const PageWrapper = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #f7f8fc;
+  background-color: var(--color-gray-50);
 `;
 
 export const CategoryList = styled.div`
@@ -50,7 +50,7 @@ export const SortButton = styled.div`
   padding: 8px 12px;
   border: 1px solid ${(props) => (props.isOpen ? "#00a843" : "#d1d1d1")};
   border-radius: 10px;
-  background-color: white;
+  background-color: var(--color-white);
   color: var(--color-gray-600);
   cursor: pointer;
   display: flex;
@@ -67,7 +67,7 @@ export const DropdownMenu = styled.ul`
   top: calc(100% + 4px);
   left: 0;
   width: 100%;
-  background-color: white;
+  background-color: var(--color-white);
   border: 1px solid #d1d1d1;
   border-radius: 4px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);

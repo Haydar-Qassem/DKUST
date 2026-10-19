@@ -10,7 +10,7 @@ export const CardContainer = styled.div`
   flex-direction: column;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   padding-left: 0;
-  background-color: #ffffff;
+  background-color: var(--color-white);
 `;
 
 export const ImageBox = styled.div`

@@ -6,6 +6,10 @@ import SocialButton from "../../../src/components/common/SocialButton/index.jsx"
 import AuthCard from "../../../src/components/common/AuthCard/index.jsx";
 import { RegisterStyles } from "./styles";
 import { useFormik } from "formik";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser } from "../../store/auth/authSelectors.js";
+import { login } from "../../store/auth/authSlice.js";
+import { useNavigate } from "react-router-dom";
 
 const registerSchema = Yup.object({
   firstName: Yup.string().required("First name is required"),
@@ -26,6 +30,10 @@ const registerSchema = Yup.object({
 });
 
 function Register() {
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const handleRegister = (e) => {
     e.preventDefault();
     const userData = {
@@ -37,6 +45,8 @@ function Register() {
       isAgreed: formik.values.isAgreed,
     };
     console.log(userData);
+    dispatch(login(formik.values.firstName + " " + formik.values.lastName));
+    navigate("/");
   };
 
   const formik = useFormik({

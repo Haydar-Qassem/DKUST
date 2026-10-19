@@ -184,7 +184,7 @@ export const ProductDetailsPage = () => {
           {product.name}
         </div>
       </FilterBar>
-      <div style={{ backgroundColor: `#F7F8FC`, margin: `0` }}>
+      <div style={{ backgroundColor: `var(--color-gray-50)`, margin: `0` }}>
         <div className="container pt-5" onClick={() => navigate(`/products`)}>
           <span
             style={{

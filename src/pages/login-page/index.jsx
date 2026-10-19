@@ -6,6 +6,10 @@ import CustomButton from "../../../src/components/common/CustomButton/index.jsx"
 import SocialButton from "../../../src/components/common/SocialButton/index.jsx";
 import AuthCard from "../../../src/components/common/AuthCard/index.jsx";
 import { Main } from "./styles.js";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser } from "../../store/auth/authSelectors.js";
+import { login } from "../../store/auth/authSlice.js";
+import { useNavigate } from "react-router-dom";
 
 const loginSchema = Yup.object({
   email: Yup.string()
@@ -15,6 +19,10 @@ const loginSchema = Yup.object({
 });
 
 function Login() {
+  const dispatch = useDispatch();
+  const user = useSelector(selectUser);
+  const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -34,6 +42,8 @@ function Login() {
       rememberMe: formik.values.rememberMe,
     };
     console.log(userData);
+    dispatch(login(formik.values.email));
+    navigate("/");
   };
 
   const signInWithGoogle = () => console.log("Sign in with Google");
